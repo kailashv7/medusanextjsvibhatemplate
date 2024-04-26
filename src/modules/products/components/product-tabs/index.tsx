@@ -3,17 +3,22 @@
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 
 import Back from "@modules/common/icons/back"
+import imageUrl from "/public/sizechart.jpeg"
 import FastDelivery from "@modules/common/icons/fast-delivery"
 import Refresh from "@modules/common/icons/refresh"
-
+import Image from "next/image"
 import Accordion from "./accordion"
-
+import React, { useState } from "react"
 type ProductTabsProps = {
   product: PricedProduct
 }
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = [
+    {
+      label: "Sizing Chart",
+      component: <SizingChart />,
+    },
     {
       label: "Product Information",
       component: <ProductInfoTab product={product} />,
@@ -38,6 +43,55 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
           </Accordion.Item>
         ))}
       </Accordion>
+    </div>
+  )
+}
+
+const SizingChart = () => {
+  // const imageUrl = "sizechart.jpeg" // Placeholder image URL
+
+  const [showFullScreen, setShowFullScreen] = useState(false)
+
+  const handleImageClick = () => {
+    setShowFullScreen(true)
+  }
+
+  const handleCloseFullScreen = () => {
+    setShowFullScreen(false)
+  }
+
+  return (
+    <div className="text-sm font-regular ">
+      <div className="py-3">Click to enlarge</div>
+      <div className="grid grid-cols-1 gap-y-8">
+        <div className="flex items-start gap-x-2">
+          {/* <img
+            src="/sizechart.jpeg"
+            alt="sizechart   onClick={handleImageClick}"
+          /> */}
+
+          <Image
+            className="image"
+            src={imageUrl}
+            alt="Full Screen"
+            onClick={handleImageClick}
+          />
+          {/* {showFullScreen && (
+            <div
+              className="fullscreen-overlay active"
+              onClick={handleCloseFullScreen}
+            >
+              <div className="fullscreen-image">
+                <Image
+                  className="centered-image"
+                  src={imageUrl}
+                  alt="Full Screen"
+                />
+              </div>
+            </div>
+          )} */}
+        </div>
+      </div>
     </div>
   )
 }

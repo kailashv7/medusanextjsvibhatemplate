@@ -1,6 +1,7 @@
 import { Text, clx } from "@medusajs/ui"
 
 import { getCategoriesList, getCollectionsList } from "@lib/data"
+import Link from "next/link"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
@@ -10,143 +11,122 @@ export default async function Footer() {
   const { product_categories } = await getCategoriesList(0, 6)
 
   return (
-    <footer className="border-t border-ui-border-base w-full">
-      <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
-          <div>
-            <LocalizedClientLink
-              href="/"
-              className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
-            >
-              Medusa Store
-            </LocalizedClientLink>
+    <div>
+      <div className="xl:content-container xl:justify-between flex flex-row">
+        <div className=" 2xl:pt-10">
+          <text className="xl:text-4xl md:text-2xl font-optinonoy md:pb-10 pl-3 md:pl-10 xl:pl-0 ">
+            Sign up and get 10% off*
+          </text>
+
+          <div className="  sm:px-0 pl-0  md:pl-10 xl:pl-0">
+            <p className=" font-helvitica  text-sm md:grid md:grid-row-2   md:h-full md:p-6 p-1 pl-3 md:px-3 md:pt-6 md:w-80 w-98  ">
+              Be first to receive updates on new collections,style
+              inspiration,gift ideas and exclusive access. Sign up to Vibha
+              Eternal Club today and receive 10% off* on your next online
+              purchase(full-price items only).*Terms and condition apply.
+            </p>
           </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
-            {product_categories && product_categories?.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
-                </span>
-                <ul className="grid grid-cols-1 gap-2" data-testid="footer-categories">
-                  {product_categories?.slice(0, 6).map((c) => {
-                    if (c.parent_category) {
-                      return
-                    }
+          <p className="pl-3 pb-10 pt-3 md:pb-10 md:pl-12 xl:pl-0">
+            <Link
+              href="/account/login"
+              className="top-11 px-8 py-2 rounded-full font-holispay bg-gold text-black text-center"
+            >
+              Join the club
+            </Link>
+          </p>
+        </div>
+        <div className="">
+          <p className="  font-bold font-holispay pb-8 lg:pl-[28rem] pl-8 text-9xl sm:pl-[15rem] sm:text-[14rem] md:pl-[10rem]  ">
+            V
+          </p>
+        </div>
+      </div>
+      <div>
+        <div className="px-3 md:px-16 lg:px-16 flex sm:flex-row flex-col justify-between lg:pt-10 border-t-2 ">
+          <div className="flex flex-row sm:flex-col pb-16">
+            <div>
+              <p className="text-2xl  font-optinonoy flex flex-col gap-y-2">
+                Latest from Vibha
+              </p>
+              <p className="w-60 text-md font-helvitica">
+                Be the first to know about exciting new designs,special
+                events,store openings and much more
+              </p>
+            </div>
 
-                    const children =
-                      c.category_children?.map((child) => ({
-                        name: child.name,
-                        handle: child.handle,
-                        id: child.id,
-                      })) || null
-
-                    return (
-                      <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
-                        key={c.id}
-                      >
-                        <LocalizedClientLink
-                          className={clx(
-                            "hover:text-ui-fg-base",
-                            children && "txt-small-plus"
-                          )}
-                          href={`/categories/${c.handle}`}
-                          data-testid="category-link"
-                        >
-                          {c.name}
-                        </LocalizedClientLink>
-                        {children && (
-                          <ul className="grid grid-cols-1 ml-3 gap-2">
-                            {children &&
-                              children.map((child) => (
-                                <li key={child.id}>
-                                  <LocalizedClientLink
-                                    className="hover:text-ui-fg-base"
-                                    href={`/categories/${child.handle}`}
-                                    data-testid="category-link"
-                                  >
-                                    {child.name}
-                                  </LocalizedClientLink>
-                                </li>
-                              ))}
-                          </ul>
-                        )}
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            )}
-            {collections && collections.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
-                </span>
-                <ul
-                  className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-                    {
-                      "grid-cols-2": (collections?.length || 0) > 3,
-                    }
-                  )}
-                >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
+            <p className="pt-8 pl-4">
+              <a
+                href="/account/login"
+                className=" font-optinonoy inline-block rounded-lg px-4 py-1 border-2 border-black text-black"
+              >
+                SIGN UP
+              </a>
+            </p>
+          </div>
+          <div className="">
+            <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between">
+              <div className="text-small-regular s gap-x-10 md:gap-x-16">
+                <div className="flex flex-col gap-y-2 pb-4">
+                  <span className="text-2xl font-optinonoy txt-ui-fg-base">
+                    Legal
+                  </span>
+                  <ul className="grid grid-cols-1 font-helvitica gap-y-2 text-ui-fg-subtle txt-medium">
+                    <li>
+                      <Link href="/AboutUs">About us</Link>
                     </li>
-                  ))}
-                </ul>
+                    <li>
+                      <Link href="/RefundsAndCancellations">
+                        Refunds and cancellations
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/ReturnPolicy">Return policy</Link>
+                      {/* <a href="/privacyPolicy">Privacy Policy</a> */}
+                    </li>
+                    <li>
+                      <Link href="/TermsOfService">Terms of service</Link>
+
+                      {/* <a href="/privacyPolicy">Privacy Policy</a> */}
+                    </li>
+                    <li>
+                      <Link href="/PrivacyPolicy">Privacy policy</Link>
+
+                      {/* <a href="/privacyPolicy">Privacy Policy</a> */}
+                    </li>
+                    <li>
+                      <Link href="/CustomerService">Customer service</Link>
+
+                      {/* <a href="/privacyPolicy">Privacy Policy</a> */}
+                    </li>
+                    <li>
+                      <Link href="/ShippingPolicy">Shipping policy</Link>
+
+                      {/* <a href="/privacyPolicy">Privacy Policy</a> */}
+                    </li>
+                  </ul>
+                </div>
               </div>
-            )}
-            <div className="flex flex-col gap-y-2">
-              <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
-              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
-                <li>
-                  <a
-                    href="https://github.com/medusajs"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.medusajs.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/medusajs/nextjs-starter-medusa"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Source code
-                  </a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
-          <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Medusa Store. All rights reserved.
-          </Text>
-          <MedusaCTA />
+
+        <div className="flex  w-full   items-center justify-between text-sm md-xs text-white  text-ui-fg-muted bg-black ">
+          <Link href="/" className="text-2xl md:pl-10 font-optinonoy md-6xl ">
+            VIBHA
+          </Link>
+          <p className="flex flex-col font-optinonoy md:px-1 md:pr-10 pl-16">
+            <div style={{ fontFamily: "OPTINonoy" }}>
+              <span className=" ">
+                © {new Date().getFullYear()} VIBHA. All rights reserved.
+              </span>
+            </div>
+            <span>
+              VIBHA and the V logo are registered and trademarks of VIBHA
+              International.
+            </span>
+          </p>
         </div>
       </div>
-    </footer>
+    </div>
   )
 }
